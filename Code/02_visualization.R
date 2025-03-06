@@ -1,7 +1,10 @@
-# Code for visualizing satellite data
+# R code for visualizing satellite data
+
+install.packages("viridis")
 
 library(terra)
 library(imageRy)
+library(viridis)
 
 #Listing files
 im.list()
@@ -62,3 +65,31 @@ plot(b2)
 plot(b3)
 plot(b4)
 plot(b8)
+
+# Cambiamo i colori alle immagini
+cl = colorRampPalette(c("black","lightgrey"))(100)
+plot(b2,col=cl)
+plot(b3,col=cl)
+plot(b4,col=cl)
+plot(b8,col=cl)
+
+# Per fare uno stack
+sent = c(b2, b3, b4, b8)
+plot(sent, col=cl)
+
+# Per cambiare i nomi
+names(sent)=c("b2blue","b3green","b4red","b8NIR")
+
+# Per plottare un solo elemento da uno stack
+plot(sent$b8NIR)
+# in alternativa
+plot(sent[[4]])
+
+# Importing several bands altogether
+sentdol=im.import("sentinel.dolomites")
+
+# How to import several sets altogether
+pairs(sentdol)
+
+plot(sentdol, col=viridis(100))
+plot(sentdol, col=viridis(100))
