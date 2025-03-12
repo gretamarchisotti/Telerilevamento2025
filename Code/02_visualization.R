@@ -93,3 +93,39 @@ pairs(sentdol)
 
 plot(sentdol, col=viridis(100))
 plot(sentdol, col=viridis(100))
+
+# 1 - band 2 (blue)
+# 2 - band 3 (green)
+# 3 - band 4 (red)
+# 4 - band 8 (NIR)
+
+# Natural colors: facciamo un plotaggio dell'immagine usando colori naturali
+im.plotRGB(sentdol, r=3, g=2, b=1)
+# Otteniamo un'immagine piuttosto grezza, che il nostro occhio non riesce a distinguere bene; si vede solo un buon contrasto tra rocce e vegetazione
+
+# False colors: aggiungiamo anche il NIR
+# Non possiamo usare più di tre bande, quindi facciamo scorrere tutti di una posizione
+im.plotRGB(sentdol, r=4, g=3, b=2)
+# Le piante riflettono molto nel NIR, quindi il filtro del NIR corrisponderà alle piante
+# Risulta molto più facile distinguere i diversi tipi di vegetazione, quindi conifere e latifoglie e le praterie sommitali (rosso chiaro)
+# Vediamo anche l'acqua
+
+# Pongo il NIR al posto del filtro green, quindi la vegetazione sarà verde
+im.plotRGB(sentdol, r=3, g=4, b=2)
+# Quello che fa variare il colore dell'immagine è dove metto il NIR
+
+# Pongo il NIR al posto del filtro blue, quindi la vegetazione sarà blu
+im.plotRGB(sentdol, r=3, g=2, b=4)
+# Il suolo nudo in questi casi tende a diventare giallo
+
+
+
+
+
+
+
+
+
+
+
+
