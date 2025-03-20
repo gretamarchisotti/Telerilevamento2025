@@ -1,9 +1,11 @@
 # R code for performing multitemporal analysis
 
+install.packages("ggridges") # This is needed to create ridgeline plot
 library(terra)
 library(imageRy)
 library(viridis)
 
+# Listing the data
 im.list()
 
 EN_01 = im.import("EN_01.png")
@@ -34,3 +36,29 @@ gr = im.import("greenland")
 grdif = gr[[4]] - gr[[1]] #2015 - 2000
 plot(grdif)
 # Tutte le parti gialle sono quelle che nel 2015 mostrano un aumento di temperatura maggiore rispetto alle temperature del 2000
+
+# Ridgeline plots
+im.ridgeline(gr, scale=1)
+# Il parametro di scala (scale=) dice quando può essere grande ogni picco
+# Si può cambiare colore con l'argomento palette=
+im.ridgeline(gr, scale=2, palette="inferno")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
