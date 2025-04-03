@@ -67,7 +67,39 @@ all = data.frame(classall, percentage)
 ggplot(data=all, aes(x=classall, y=percentage, color=classall)) +
   geom_bar(stat="identity", fill="white")
 
+#----- Solar Orbiter
 
+im.list()
 
+solar = im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
 
+# Classification of the image in three classes
+solar_c = im.classify(solar, num_clusters=3)
 
+im.multiframe(1,2)
+plot(solar)
+plot(solar_c)
+
+# Class 1 = low energy
+# Class 2 = medium energy
+# Class 3 = high energy
+
+# Sostituiamo le classi iniziali random con classi coerenti
+solar_cs = subst(solar_c, c(1,2,3), c("C1_Low","C2_Medium","C3_High")) # Se non metto C1, C2 e C3 li mette in ordine alfabetico
+plot(solar_cs)
+
+# Calculate the percentages of the Sun energy classes with one line of code
+perc_solar = freq(solar_cs)$count*100/ncell(solar_cs)
+perc_solar # Low energy =  38%, Medium energy = 41%, High energy = 21%
+
+# Create dataframe
+class = c("C1_Low", "C2_Medium", "C3_High")
+perc = c(38,41,21)
+tab_sol = data.frame(class, perc)
+tab_sol
+
+# Final ggplot
+ggplot(tab_sol, aes(x=class, y=perc, fill=class, color=class)) + geom_bar(stat="identity")
+
+# Invertiamo gli assi
+ggplot(tab_sol, aes(x=class, y=perc, fill=class, color=class)) + geom_bar(stat="identity") + coord_flip()
