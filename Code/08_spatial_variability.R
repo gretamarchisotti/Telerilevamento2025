@@ -86,6 +86,7 @@ p1 + p2
 # Plot the original nir and the stdev
 p3 = im.ggplot(nir)
 p3 + p1
+# In questo modo vediamo meglio le zone dove c'è un forte cambiamento
 
 # With ggplot, plot the original set in RGB (ggRGB) together with the sd with 3 and 5 pixels
 p3 = ggRGB(sent, r=1, g=2, b=3)
