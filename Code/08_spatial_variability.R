@@ -136,16 +136,19 @@ p3 = im.ggplot(sd3_a5)
 p4 = im.ggplot(sd5_a5)
 p1 + p2 + p3 + p4
 
+# Variance
+var3 = sd3^2
 
+dev.off()
+plot(var3)
 
+im.multiframe(1,2)
+plot(sd3)
+plot(var3)
+# La differenza è che la varianza evidenzia gli estremi, ma perde tutta la parte di variabilità intermedia
 
-
-
-
-
-
-
-
-
-
-
+# Questo è ancora più evidente con una moving window di 5x5
+var5 = sd5^2
+im.multiframe(1,2)
+plot(sd5)
+plot(var5)
