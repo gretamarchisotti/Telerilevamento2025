@@ -53,3 +53,21 @@ plot(ndvi2024, col=rocket(100), main="NDVI 2024")
 plot(ndvi2025, col=rocket(100), main="NDVI 2025")
 dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
+# RIDGELINE PLOT??
+canada = c(sentinel2024[[4]], sentinel2025[[4]])
+names = c("June 2024", "June 2025")
+im.ridgeline(canada, scale=2)
+
+# ANALISI MULTITEMPORALE
+
+# CLASSIFICAZIONE DELLE IMMAGINI
+sentinel2024_cl = im.classify(sentinel2024, num_clusters=2)
+sentinel2025_cl = im.classify(sentinel2025, num_clusters=2)
+
+# CALCOLO DELLA DEVIAZIONE STANDARD E PCA
+
+
+
+
+
+
