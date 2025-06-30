@@ -1,9 +1,7 @@
-// Codice per scaricare l'immagine del 2024
-// ==============================================
-// Sentinel-2 Surface Reflectance - Cloud Masking and Visualization
-// https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED
-// ==============================================
+// Codice per scaricare le immagini di Sentinel-2 da Google Heart Engine
+// Le immagini sono relative agli incendi avvenuti in Canada, nell'area al confine tra Manitoba e Saskatchewan
 
+// Immagine del 2024
 // ==============================================
 // Function to mask clouds using the QA60 band
 // Bits 10 and 11 correspond to opaque clouds and cirrus
@@ -80,12 +78,7 @@ Export.image.toDrive({
 // =====================================================================================
 // =====================================================================================
 
-// Codice per scaricare l'immagine del 2025
-// ==============================================
-// Sentinel-2 Surface Reflectance - Cloud Masking and Visualization
-// https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED
-// ==============================================
-
+// Immagine del 2025
 // ==============================================
 // Function to mask clouds using the QA60 band
 // Bits 10 and 11 correspond to opaque clouds and cirrus
