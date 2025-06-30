@@ -1,6 +1,8 @@
-# Progetto d'Esame, Greta Marchisotti - Codice in R per l'elaborazione delle immagini
+# PROGETTO D'ESAME - CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
+# Greta Marchisotti
+
 # Le immagini sono relative agli incendi verificatisi nella primavera del 2025 in Canada, nell'area a confine tra le regioni Manitoba e Saskatchewan
-# Grazie a Google Earth Engine sono state scaricate due immagini di Sentinel-2 (per il codice vedere lo script Esame.js)
+# Grazie a Google Earth Engine sono state scaricate due immagini di Sentinel-2 (per il codice si veda lo script Esame.js)
 # La prima riguarda una media delle immagini di giugno 2024, la seconda una media delle immagini di giugno 2025, dopo che si sono verificati gli incendi
 
 # Il salvataggio delle immagini da R, salvo diversamente specificato, è stato fatto con il menù a tendina di R
@@ -13,6 +15,7 @@ library(viridis) # Pacchetto per cambiare le palette di colori anche per chi è 
 # Imposto la working directory
 setwd("C:/Users/march/Desktop/BOLOGNA/II semestre/Telerilevamento geoecologico in R/ESAME")
 
+# IMPORTAZIONE DELLE IMMAGINI
 # Importo in R le immagini scaricate con Google Earth Engine
 sentinel2024 <- rast("Canada2024.tif")
 sentinel2024
@@ -32,6 +35,7 @@ plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(
 
 # Salvo le immagini in formato .png
 
+# NIR
 # Visualizzo le due immagini con il NIR ponendo il NIR al posto del filtro red e le inserisco in un multiframe con le immagini in RGB
 im.multiframe(2,2)
 plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
@@ -40,6 +44,7 @@ im.plotRGB(sentinel2024, r=4, g=1, b=3)
 im.plotRGB(sentinel2025, r=4, g=1, b=3)
 dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
+# NDVI
 # Calcolo l'NDVI per entrambe le immagini e le visualizzo graficamente in un multiframe, modificandone il colore con una delle palette di viridis 
 ndvi2024 = im.ndvi(sentinel2024, 4, 1)
 ndvi2025 = im.ndvi(sentinel2025, 4, 1)
