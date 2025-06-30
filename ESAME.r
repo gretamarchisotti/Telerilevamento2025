@@ -40,5 +40,11 @@ im.plotRGB(sentinel2024, r=4, g=1, b=3)
 im.plotRGB(sentinel2025, r=4, g=1, b=3)
 dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
-
+# Calcolo l'NDVI per entrambe le immagini e le visualizzo graficamente in un multiframe, modificandone il colore con una delle palette di viridis 
+ndvi2024 = im.ndvi(sentinel2024, 4, 1)
+ndvi2025 = im.ndvi(sentinel2025, 4, 1)
+im.multiframe(2,1)
+plot(ndvi2024, col=rocket(100), main="NDVI 2024")
+plot(ndvi2025, col=rocket(100), main="NDVI 2025")
+dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
