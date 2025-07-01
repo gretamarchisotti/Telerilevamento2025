@@ -11,6 +11,8 @@
 library(terra) # Paccheto per l'analisi spaziale dei dati con vettori e dati raster
 library(imageRy) # Pacchetto per manipolare, visualizzare ed esportare immagini raster in R
 library(viridis) # Pacchetto per cambiare le palette di colori anche per chi è affetto da colorblindness
+library(ggplot2) # Pacchetto per creare grafici ggplot
+library(patchwork) # Pacchetto per comporre più grafici ggplot insieme
 
 # Imposto la working directory
 setwd("C:/Users/march/Desktop/BOLOGNA/II semestre/Telerilevamento geoecologico in R/ESAME")
@@ -64,16 +66,37 @@ ndvi_diff = ndvi2024-ndvi2025
 im.multiframe(1,2)
 plot(canada_diff, col=mako(100), main="NIR")
 plot(ndvi_diff, col=mako(100), main="NDVI")
-dev.off()
+dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
 # CLASSIFICAZIONE DELLE IMMAGINI
+# Creao un multiframe per osservare le due immagini classificate insieme
+im.multiframe(1,2)
+
+# Classifico le due immagini in due classi (class 1; class 2)
 sentinel2024_cl = im.classify(sentinel2024, num_clusters=2)
 sentinel2025_cl = im.classify(sentinel2025, num_clusters=2)
+# In blu osserviamo l'area della foresta, in giallo tutto ciò che non è foresta
+dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
-# CALCOLO DELLA DEVIAZIONE STANDARD E PCA
+# Calcolo la percentuale per le due classi, per entrambe le immagini; poi osservo i risultati
+perc2024 = freq(sentinel2024_cl)*100/ncell(sentinel2024_cl)
+perc2024 # Foresta: 76%, Altro: 24%
 
+perc2025 = freq(sentinel2025_cl)*100/ncell(sentinel2025_cl)
+perc2025 # Foresta: 51%, Altro: 49%
 
+# Creo una tabella con i risultati
+classi = c("Forest", "Fire")
+a2024 = c(76,49)
+a2025 = c(51,49)
+tab = data.frame(classi, a2024, a2025)
+tab # Osservo il risultato, riportato qui di seguito
+#    classi a2024 a2025
+# 1  Forest  76    51
+# 2  Fire    49    49
 
-
-
-
+# Mettiamo i due grafici uno accanto all'altro e aggiustiamo le scale
+p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+p1 + p2
+dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
