@@ -1,7 +1,11 @@
 // Codice per scaricare le immagini di Sentinel-2 da Google Heart Engine
 // Le immagini sono relative agli incendi avvenuti in Canada, nell'area al confine tra Manitoba e Saskatchewan
+// Le immagini sono state ritagliate per l'area di interesse, chiamata aoi, e sono state selezionate solo quelle con una copertura nuvolosa inferiore al 20%
+// Le bande selezionate sono: B4 (red), B3 (green), B2 (blue) e B8 (NIR)
+// I file finali sono stati poi esportati su Google Drive e successivamente scaricati, rispettivamente con i nomi Canada2024 e Canada2025, in formato tiff
 
 // Immagine del 2024
+// Per questa immagine è stato scelto il periodo compreso tra il 1° e il 30 giugno 2024, per cui è stata fatta una media
 // ==============================================
 // Function to mask clouds using the QA60 band
 // Bits 10 and 11 correspond to opaque clouds and cirrus
@@ -79,6 +83,7 @@ Export.image.toDrive({
 // =====================================================================================
 
 // Immagine del 2025
+// Per questa immagine è stato scelto il periodo compreso tra il 1° e il 30 giugno 2025, per cui è stata fatta una media
 // ==============================================
 // Function to mask clouds using the QA60 band
 // Bits 10 and 11 correspond to opaque clouds and cirrus
