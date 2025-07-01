@@ -53,12 +53,18 @@ plot(ndvi2024, col=rocket(100), main="NDVI 2024")
 plot(ndvi2025, col=rocket(100), main="NDVI 2025")
 dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
 
-# RIDGELINE PLOT??
-canada = c(sentinel2024[[4]], sentinel2025[[4]])
-names = c("June 2024", "June 2025")
-im.ridgeline(canada, scale=2)
-
 # ANALISI MULTITEMPORALE
+# Faccio la differenza tra l'immagine del 2024 e quella del 2025, scegliendo solo la banda B8 relativa al NIR
+canada_diff = sentinel2024[[4]]-sentinel2025[[4]]
+
+# Ripeto la stessa procedura per l'NDVI
+ndvi_diff = ndvi2024-ndvi2025
+
+# Faccio un multiframe con i plot di entrambe le differenze; quindi, salvo l'immagine in formato .png e chiudo il pannello grafico
+im.multiframe(1,2)
+plot(canada_diff, col=mako(100), main="NIR")
+plot(ndvi_diff, col=mako(100), main="NDVI")
+dev.off()
 
 # CLASSIFICAZIONE DELLE IMMAGINI
 sentinel2024_cl = im.classify(sentinel2024, num_clusters=2)
