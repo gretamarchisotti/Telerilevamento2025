@@ -11,7 +11,7 @@ Sono state pertanto scelte due immagini di Sentinel-2, che riguardano una media 
 ## Raccolta delle immagini
 Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), scegliendo l'area descritta precedentemente.
 
-Il codice in java script per ottenere le immagini viene riportato qui di seguito.
+Il codice completo in java script utilizzato per ottenere le immagini si trova nel file Codice_js_GM.js
 
 ## Pacchetti utilizzati
 I pacchetti di R che sono stati utilizzati per questo codice sono i seguenti:
@@ -43,3 +43,20 @@ dev.off()
 ```
 
 L'immagine risultante è la seguente:
+
+<img src="../ESAME/Immagini/Canada_RGB.png" width=50% />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
