@@ -1,4 +1,4 @@
-o# PROGETTO D'ESAME - CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
+oo# PROGETTO D'ESAME - CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
 # Greta Marchisotti
 
 # Le immagini sono relative agli incendi verificatisi nella primavera del 2025 in Canada, nell'area a confine tra le regioni Manitoba e Saskatchewan
@@ -38,13 +38,13 @@ plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(
 # Salvo le immagini in formato .png
 
 # NIR
-# Visualizzo le due immagini con il NIR ponendo il NIR al posto del filtro red e le inserisco in un multiframe con le immagini in RGB
+# Visualizzo le due immagini con il NIR ponendo la banda 8 al posto della banda del rosso e le inserisco in un multiframe con le immagini in RGB
 im.multiframe(2,2)
 plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
 plotRGB(sentinel2025, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2025")
 im.plotRGB(sentinel2024, r=4, g=1, b=3)
 im.plotRGB(sentinel2025, r=4, g=1, b=3)
-dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # NDVI
 # Calcolo l'NDVI per entrambe le immagini e le visualizzo graficamente in un multiframe, modificandone il colore con una delle palette di viridis 
@@ -53,7 +53,7 @@ ndvi2025 = im.ndvi(sentinel2025, 4, 1)
 im.multiframe(2,1)
 plot(ndvi2024, col=rocket(100), main="NDVI 2024")
 plot(ndvi2025, col=rocket(100), main="NDVI 2025")
-dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # ANALISI MULTITEMPORALE
 # Faccio la differenza tra l'immagine del 2024 e quella del 2025, scegliendo solo la banda B8 relativa al NIR
@@ -66,7 +66,7 @@ ndvi_diff = ndvi2024-ndvi2025
 im.multiframe(1,2)
 plot(canada_diff, col=mako(100), main="NIR")
 plot(ndvi_diff, col=mako(100), main="NDVI")
-dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # CLASSIFICAZIONE DELLE IMMAGINI
 # Creao un multiframe per osservare le due immagini classificate insieme
@@ -76,7 +76,7 @@ im.multiframe(1,2)
 sentinel2024_cl = im.classify(sentinel2024, num_clusters=2)
 sentinel2025_cl = im.classify(sentinel2025, num_clusters=2)
 # In blu osserviamo l'area della foresta, in giallo tutto ciò che non è foresta
-dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # Calcolo la percentuale per le due classi, per entrambe le immagini; poi osservo i risultati
 perc2024 = freq(sentinel2024_cl)*100/ncell(sentinel2024_cl)
@@ -95,8 +95,8 @@ tab # Osservo il risultato, riportato qui di seguito
 # 1  Forest  76    51
 # 2  Fire    49    49
 
-# Mettiamo i due grafici uno accanto all'altro e aggiustiamo le scale
+# Creo i due grafici e li inserisco uno accanto all'altro, aggiustando le scale
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 p1 + p2
-dev.off() # Chiudo il pannello grafico dopo aver salvato le immagini in .png
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
