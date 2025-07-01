@@ -34,7 +34,7 @@ sentinel2025 <- rast("Canada2025.tif")
 sentinel2025
 ```
 
-Le immagini importate sono state poi visualizzate nello spettro del visibile.
+Le immagini importate sono state poi visualizzate nello spettro del visibile, creando un pannello multiframe per permettere un migliore confronto.
 ```r
 im.multiframe(1,2)
 plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
@@ -44,11 +44,22 @@ dev.off()
 
 L'immagine risultante è la seguente:
 <img src="../ESAME/Immagini/CanadaRGB.png" />
+> L'immagine mostra chiaramente l'area soggetta a incendio, che corrisponde alla porzione inferiore dell'immagine di sinistra.
 
+È stato poi creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è state scelta la palette di viridis chiamata magma.
+```r
+plot(sentinel2024, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
+plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
+```
 
+Per quanto riguarda il 2024, il risultato è il seguente:
+<img src="../ESAME/Immagini/Bande2024.png" /> 
 
+Per quanto riguarda il 2025, invece, il risultato è:
+<img src="../ESAME/Immagini/Bande2025.png" />
 
-
+> Da entrambe le immagini si può notare come, mentre le bande 4, 3 e 2 sono abbastanza simili tra loro, la banda 8, e cioè il NIR risulta essere molto diversa.
+> 
 
 
 
