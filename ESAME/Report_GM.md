@@ -43,8 +43,9 @@ dev.off()
 ```
 
 L'immagine risultante è la seguente:
+<img src="../ESAME/Immagini/CanadaRGB.png" />
 
-<img src="../ESAME/Immagini/Canada_RGB.png" width=50% />
+
 
 
 
