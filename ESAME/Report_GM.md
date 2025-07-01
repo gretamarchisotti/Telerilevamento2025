@@ -1,7 +1,8 @@
-# Telerilevamento geologico in R - Progetto d'esame
-# 09/07/2025
-## Greta Marchisotti
+# Progetto d'esame (09/07/2025)
+### Telerilevamento geologico in R
+Greta Marchisotti
 
+## Introduzione
 Il progetto ha lo scopo di analizzare un'area del Canada, al confine tra le regioni Manitoba e Saskatchewan, a nord della cittadina Flin Flon, che nella primavera del 2025 è stata oggetto di un ampio incendio.
 
 L'analisi vuole osservare le differenze in termini di vegetazione tra il 2024 e il 2025 e valutare quindi l'impatto dell'incendio stesso.
@@ -46,7 +47,9 @@ L'immagine risultante è la seguente:
 <img src="../ESAME/Immagini/CanadaRGB.png" />
 > L'immagine mostra chiaramente l'area soggetta a incendio, che corrisponde alla porzione inferiore dell'immagine di sinistra.
 
-È stato poi creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è state scelta la palette di viridis chiamata magma.
+## Analisi dei dati
+### Visualizzazione delle bande
+È stato creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è state scelta la palette di viridis chiamata magma.
 ```r
 plot(sentinel2024, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
 plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
