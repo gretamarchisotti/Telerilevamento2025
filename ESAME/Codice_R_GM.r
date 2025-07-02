@@ -1,4 +1,4 @@
-oo# PROGETTO D'ESAME - CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
+# PROGETTO D'ESAME - CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
 # Greta Marchisotti
 
 # Le immagini sono relative agli incendi verificatisi nella primavera del 2025 in Canada, nell'area a confine tra le regioni Manitoba e Saskatchewan
