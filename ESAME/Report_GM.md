@@ -143,18 +143,22 @@ dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 Di seguito si riporta l'immagine ottenuta:
 <img src="../ESAME/Immagini/Classification.png" /> 
 
-> In blu si osserva l'area vegetata (class 2), mentre in giallo (class 1) tutto ciò che non è vegetato.
+> In blu si osserva l'area vegetata (class 2), mentre in giallo (class 1) tutto ciò che non è vegetato. Per semplicità, la classe 1 è stata chiamata Fire, mentre la classe 2 Forest.
 >
 > Notiamo come nell'immagine di sinistra, che corrisponde al 2025, la percentuale di pixel appartenenti alla classe 1 sono notevolmente aumentati, a causa dell'incendio.
 
-
-# Calcolo la percentuale per le due classi, per entrambe le immagini; poi osservo i risultati
+Questo si può osservare anche calcolando la percentuale delle due classi nelle immagini:
+```r
 perc2024 = freq(sentinel2024_cl)*100/ncell(sentinel2024_cl)
 perc2024 # Foresta: 76%, Altro: 24%
 
 perc2025 = freq(sentinel2025_cl)*100/ncell(sentinel2025_cl)
 perc2025 # Foresta: 51%, Altro: 49%
+```
+> I risultati mostrano come la percentuale di foresta sia scesa dal 76% al 51% dal 2024 al 2025 a causa dell'incendio.
 
+È stato quindi creato un grafico con ggplot() per visualizzare graficamente questa differenza: per fare ciò è stato necessario prima creare un data frame con i valori necessari; i due grafici sono poi stati plottati uno di fianco all'altro grazie al pacchetto patchwork.
+```r
 # Creo una tabella con i risultati
 classi = c("Forest", "Fire")
 a2024 = c(76,49)
@@ -170,8 +174,12 @@ p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(s
 p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 p1 + p2
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
+```
+# da sistemare il grafico!!!!!
+Il grafico è il seguente:
+<img src="../ESAME/Immagini/Class_plot.png" /> 
 
-
+## Conclusioni
 
 
 
