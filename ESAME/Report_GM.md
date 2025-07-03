@@ -1,6 +1,9 @@
 # **Progetto d'esame (09/07/2025)**
+# Analisi di un'area canadese soggetta a incendio nella primavera 2025
 ### Telerilevamento geologico in R
 Greta Marchisotti
+
+---
 
 ## Introduzione
 Il progetto ha lo scopo di analizzare un'area del Canada, al confine tra le regioni Manitoba e Saskatchewan, a nord della cittadina Flin Flon, che nella primavera del 2025 è stata oggetto di un ampio incendio.
@@ -52,6 +55,8 @@ dev.off()
 L'immagine risultante è la seguente:
 <img src="../ESAME/Immagini/CanadaRGB.png" />
 > L'immagine mostra chiaramente l'area soggetta a incendio, che corrisponde alla porzione inferiore dell'immagine di sinistra.
+
+---
 
 ## Analisi dei dati
 ### Visualizzazione delle bande
@@ -192,6 +197,8 @@ Si riportano i risultati in una tabella:
 Il grafico, invece, è il seguente:
 
 <img src="../ESAME/Immagini/Class_plot.png" /> 
+
+---
 
 ## Conclusioni
 + L'area soggetta a incendio mostra una forte diminuzione della copertura vegetativa, come visto dal valore dell'NDVI e dalla differenza nella riflettanza nell'infrarosso vicino.
