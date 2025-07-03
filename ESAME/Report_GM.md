@@ -1,4 +1,4 @@
-# Progetto d'esame (09/07/2025)
+# **Progetto d'esame (09/07/2025)**
 ### Telerilevamento geologico in R
 Greta Marchisotti
 
@@ -12,6 +12,8 @@ Sono state pertanto scelte due immagini di Sentinel-2, che riguardano una media 
 ## Raccolta delle immagini
 Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), scegliendo l'area descritta precedentemente.
 
+> [!NOTE]
+>
 > Il codice completo in java script utilizzato per ottenere le immagini si trova nel file Codice_js_GM.js
 
 ## Pacchetti utilizzati
@@ -35,6 +37,8 @@ sentinel2025 <- rast("Canada2025.tif")
 sentinel2025
 ```
 
+> [!NOTE]
+>
 > Il raster sentinel2024 corrisponde ai dati di giugno 2024, mentre sentinel2025 riguarda i dati di giugno 2025.
 
 Le immagini importate sono state poi visualizzate nello spettro del visibile, creando un pannello multiframe per permettere un migliore confronto.
@@ -120,6 +124,8 @@ plot(canada_diff, col=mako(100), main="NIR")
 plot(ndvi_diff, col=mako(100), main="NDVI")
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 ```
+> [!NOTE]
+>
 > Il file canada_diff rappresenta la differenza tra la banda del NIR del 2024 e del 2025, mentre il file ndvi_diff è dato dalla differenza dell'NDVI per il 2024 e il 2025.
 
 
@@ -168,10 +174,6 @@ classi = c("Forest", "Everything else")
 a2024 = c(76,24)
 a2025 = c(51,49)
 tab = data.frame(classi, a2024, a2025)
-tab # Osservo il risultato, riportato qui di seguito
-#    classi           a2024 a2025
-# 1  Forest             76   51
-# 2  Everything else    24   49
 
 # Creo i due grafici e li inserisco uno accanto all'altro, aggiustando le scale
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
@@ -180,18 +182,19 @@ p1 + p2
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 ```
 
-Il grafico è il seguente:
+Si riportano i risultati in una tabella:
+
+| Classe       | 2024 | 2025 |
+|---           |---   |---   |
+|   1: Altro   |  24  |  49  |
+|   2: Foresta |  76  |  51  |
+
+Il grafico, invece, è il seguente:
+
 <img src="../ESAME/Immagini/Class_plot.png" /> 
 
 ## Conclusioni
-
-
-
-
-
-
-
-
-
-
-
++ L'area soggetta a incendio mostra una forte diminuzione della copertura vegetativa, come visto dal valore dell'NDVI e dalla differenza nella riflettanza nell'infrarosso vicino.
++ Le immagini qui analizzate riguardano solo una piccola porzione di tutta l'area che è stata impattata dagli incendi della primavera 2025: per un'analisi su più larga scala è necessario scaricare immagini complete di tutte le regioni di Manitoba e Saskatchewan.
++ Queste aree sono soggette a incendi annuali: le immagini del 2024 mostrano però una vegetazione tuttosommato sana e la porzione di suolo nudo è ridotta. Questo probabilmente è dovuto a un adattamento della vegetazione di queste zone a questo tipo di disturbo, nonostante gli impatti sul breve periodo siano notevoli. Un ulteriore sviluppo di queste analisi potrebbe riguardare il confronto dell'impatto degli incendi nei vari anni e non solo di quelli del 2025.
++ Il telerilevamento e l'analisi dei dati attraverso le bande di riflettanza e gli indici spettrali sono un valido strumento per analizzare i dati da satellote e valutare gli impatti che fenomeni come gli incendi possono avere su vaste aree.
