@@ -12,7 +12,7 @@ Sono state pertanto scelte due immagini di Sentinel-2, che riguardano una media 
 ## Raccolta delle immagini
 Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), scegliendo l'area descritta precedentemente.
 
-Il codice completo in java script utilizzato per ottenere le immagini si trova nel file Codice_js_GM.js
+> Il codice completo in java script utilizzato per ottenere le immagini si trova nel file Codice_js_GM.js
 
 ## Pacchetti utilizzati
 I pacchetti di R che sono stati utilizzati per questo codice sono i seguenti:
@@ -21,7 +21,7 @@ library(terra) # Paccheto per l'analisi spaziale dei dati con vettori e dati ras
 library(imageRy) # Pacchetto per manipolare, visualizzare ed esportare immagini raster in R
 library(viridis) # Pacchetto per cambiare le palette di colori anche per chi è affetto da colorblindness
 library(ggplot2) # Pacchetto per creare grafici ggplot
-library(patchwork) # Pacchetto per comporre più grafici ggplot insieme
+library(patchwork) # Pacchetto utilizzato per comporre più grafici ggplot insieme
 ```
 
 ## Impostazione della working directory e importazione delle immagini
@@ -34,6 +34,8 @@ sentinel2024
 sentinel2025 <- rast("Canada2025.tif")
 sentinel2025
 ```
+
+> Il raster sentinel2024 corrisponde ai dati di giugno 2024, mentre sentinel2025 riguarda i dati di giugno 2025.
 
 Le immagini importate sono state poi visualizzate nello spettro del visibile, creando un pannello multiframe per permettere un migliore confronto.
 ```r
@@ -49,7 +51,7 @@ L'immagine risultante è la seguente:
 
 ## Analisi dei dati
 ### Visualizzazione delle bande
-È stato creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è state scelta la palette di viridis chiamata magma.
+È stato creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è stata scelta la palette di viridis chiamata magma.
 ```r
 plot(sentinel2024, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
 plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
@@ -78,7 +80,7 @@ dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 Si ottiene in questo modo l'immagine riportata qui di seguito:
 <img src="../ESAME/Immagini/CanadaRGB_NIR.png" />
 
-> Le immagini in basso sono quelle in cui è visualizzata la banda del NIR che, essendo stata posta al posto della banda red, permette di visualizzare la vegetazione in rosso. Questa banda è infatti la più indicata per visualizzare la vegetazione e le diverse sfumature di rosso corrispondono a diverse tipologie di vegetazione. Il suolo nudo appare invece in azzurro chiaro.
+> Le immagini in basso sono quelle in cui è visualizzata la banda del NIR che, essendo stata inserita al posto della banda red, permette di visualizzare la vegetazione in rosso. Questa banda è infatti la più indicata per visualizzare la vegetazione e le diverse sfumature di rosso corrispondono a diverse tipologie di vegetazione. Il suolo nudo appare invece in azzurro chiaro.
 
 ### Indici spettrali: NDVI
 È stato calcolato il Normalized Difference Vegetation Index (NDVI), cioè un indice per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione radiometrica in entrata e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
@@ -102,12 +104,12 @@ L'immagine che si ottiene è la seguente:
 
 > Come accennato precedentemente, l'NDVI ha valori più bassi nell'area soggetta a incendio, rispetto alla stessa area del 2024.
 
-# Analisi multitemporale
+### Analisi multitemporale
 Facendo un'analisi multitemporale è poi possibile confrontare le differenze tra l'immagine del 2024 e quella del 2025.
 
 In questo caso, è stato scelto di confrontare le due immagini per quanto riguarda la banda del NIR e l'NDVI, per evidenziare le differenze relative in particolare alla vegetazione.
 
-Le due immagini finali sono state plottate insieme in un pannello multiframe, scegliendo la paletta di viridis chiamata mako.
+Le due immagini finali sono state plottate insieme in un pannello multiframe, scegliendo la palette di viridis chiamata mako.
 
 ```r
 canada_diff = sentinel2024[[4]]-sentinel2025[[4]]
@@ -118,6 +120,8 @@ plot(canada_diff, col=mako(100), main="NIR")
 plot(ndvi_diff, col=mako(100), main="NDVI")
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 ```
+> Il file canada_diff rappresenta la differenza tra la banda del NIR del 2024 e del 2025, mentre il file ndvi_diff è dato dalla differenza dell'NDVI per il 2024 e il 2025.
+
 
 Il risultato è il seguente:
 <img src="../ESAME/Immagini/Diff_NIR_NDVI.png" /> 
@@ -125,9 +129,9 @@ Il risultato è il seguente:
 > Osserviamo come la differenza è maggiore nell'area soggetta a incendio sia per quanto riguarda la banda del NIR che per quanto riguarda l'NDVI, mentre il resto dell'area è rimasta pressochè uguale.
 
 ### Classificazione delle immagini
-Infine, è stato scelto di classificare le immagini in due classi corrispondenti all'area coperta da vegetazione e tutta la restante area, ccomposta principalmente da laghi, suolo nudo e dall'area dell'incendio nell'immagine del 2025.
+Infine, è stato scelto di classificare le immagini in due classi corrispondenti all'area coperta da vegetazione e tutta la restante area, composta principalmente da laghi, suolo nudo e dall'area dell'incendio nell'immagine del 2025.
 
-Per fare ciò, è stato innanzitutto aperto un pannello multiframe per permette la visualizzazione delle immagini insieme, ed è stata poi utilizzata la funzione im.classify() di imagery, creata appositamente per questo tipo di classificazioni.
+Per fare ciò, è stato innanzitutto aperto un pannello multiframe per permette la visualizzazione delle immagini insieme, ed è stata poi utilizzata la funzione im.classify() di imageRy, creata appositamente per questo tipo di classificazioni.
 Le immagini che sono state scelte sono quelle iniziali, comprendenti tutte e quattro le bande (RGB e NIR).
 
 ```r
@@ -161,13 +165,13 @@ perc2025 # Foresta: 51%, Altro: 49%
 ```r
 # Creo una tabella con i risultati
 classi = c("Forest", "Fire")
-a2024 = c(76,49)
+a2024 = c(76,24)
 a2025 = c(51,49)
 tab = data.frame(classi, a2024, a2025)
 tab # Osservo il risultato, riportato qui di seguito
 #    classi a2024 a2025
 # 1  Forest  76    51
-# 2  Fire    49    49
+# 2  Fire    24    49
 
 # Creo i due grafici e li inserisco uno accanto all'altro, aggiustando le scale
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
@@ -175,7 +179,7 @@ p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(s
 p1 + p2
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 ```
-# da sistemare il grafico!!!!!
+
 Il grafico è il seguente:
 <img src="../ESAME/Immagini/Class_plot.png" /> 
 
