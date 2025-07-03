@@ -87,13 +87,13 @@ perc2025 # Foresta: 51%, Altro: 49%
 
 # Creo una tabella con i risultati
 classi = c("Forest", "Fire")
-a2024 = c(76,49)
+a2024 = c(76,24)
 a2025 = c(51,49)
 tab = data.frame(classi, a2024, a2025)
 tab # Osservo il risultato, riportato qui di seguito
 #    classi a2024 a2025
 # 1  Forest  76    51
-# 2  Fire    49    49
+# 2  Fire    24    49
 
 # Creo i due grafici e li inserisco uno accanto all'altro, aggiustando le scale
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
