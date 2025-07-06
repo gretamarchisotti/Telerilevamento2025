@@ -92,7 +92,7 @@ im.plotRGB(sentinel2025, r=4, g=1, b=3)
 ```
 
 Si ottiene in questo modo l'immagine riportata qui di seguito:
-<img src="../ESAME/Immagini/CanadaRGB_NIR.png" />
+<img src="../ESAME/Immagini/CanadaRGB_NIR.png" width=120% />
 
 > **Commento**
 > 
@@ -128,7 +128,7 @@ perc2025 # Foresta: 51%, Altro: 49%
 ```
 > I risultati mostrano come la percentuale di foresta sia scesa dal 76% al 51% dal 2024 al 2025 a causa dell'incendio.
 
-È stato quindi creato un grafico con la funzione ```ggplot()``` per visualizzare graficamente questa differenza: per fare ciò è stato necessario prima creare un dataframe con i valori necessari; i due grafici sono poi stati plottati uno di fianco all'altro grazie al pacchetto ```patchwork```.
+È stato quindi creato un grafico con la funzione ```ggplot()``` per visualizzare graficamente questa differenza: per fare ciò è stato necessario prima creare un dataframe con i valori necessari; i due grafici sono poi stati plottati uno di fianco all'altro.
 ```r
 classi = c("Forest", "Everything else")
 a2024 = c(76,24)
@@ -152,11 +152,11 @@ Il grafico, invece, è il seguente:
 <img src="../ESAME/Immagini/Class_plot.png" /> 
 
 ### Indici spettrali: NDVI
-È stato calcolato il Normalized Difference Vegetation Index (NDVI), cioè un indice per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione radiometrica in entrata e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
+Il Normalized Difference Vegetation Index (NDVI) è un indice utilizzato per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione radiometrica in entrata e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
 
-Siccome la vegetazione sana riflette molto nell'infrarosso vicino e poco nel red, il suo NDVI avrà valori molto alti; viceversa, la vegetazione stressata avrà una riflettanza minore nel NIR e maggiore nel red e quindi il suo NDVI sarà più basso.
+Siccome la vegetazione sana riflette molto nell'infrarosso vicino e poco nel rosso, il suo NDVI avrà valori molto alti; viceversa, la vegetazione stressata avrà una riflettanza minore nel NIR e maggiore nel rosso e quindi il suo NDVI sarà più basso.
 
-Il codice per calcolare l'NDVI nelle immagini è il seguente e le immagini sono state plottate in un pannello multiframe:
+Il codice per calcolare l'NDVI nelle immagini è il seguente:
 ```r
 ndvi2024 = im.ndvi(sentinel2024, 4, 1)
 ndvi2025 = im.ndvi(sentinel2025, 4, 1)
@@ -172,14 +172,14 @@ L'immagine che si ottiene è la seguente:
 
 > **Commento**
 >
-> Come accennato precedentemente, l'NDVI ha valori più bassi nell'area soggetta a incendio, rispetto alla stessa area del 2024.
+> Come ci si aspettava da quanto detto precedentemente, l'NDVI ha valori più bassi nell'area soggetta a incendio, rispetto alla stessa area del 2024.
+>
+> Inoltre, valori di NDVI prossimi allo zero rappresentano aree di suolo nudo o di assenza di vegetazione, mentre valori negativi possono indicare zone in cui è presente acqua, come i laghi in questo caso.
 
 ### Analisi multitemporale
-Facendo un'analisi multitemporale è poi possibile confrontare le differenze tra l'immagine del 2024 e quella del 2025.
+Facendo un'analisi multitemporale è poi possibile confrontare le differenze tra l'immagine del 2024 e quella del 2025: in questo caso, è stato scelto di confrontare le due immagini per quanto riguarda la banda del NIR e l'NDVI, per evidenziare le differenze relative in particolare alla vegetazione.
 
-In questo caso, è stato scelto di confrontare le due immagini per quanto riguarda la banda del NIR e l'NDVI, per evidenziare le differenze relative in particolare alla vegetazione.
-
-Le due immagini finali sono state plottate insieme in un pannello multiframe, scegliendo la palette di viridis chiamata mako.
+Le due immagini finali sono state plottate insieme in un pannello multiframe.
 
 ```r
 canada_diff = sentinel2024[[4]]-sentinel2025[[4]]
@@ -198,7 +198,11 @@ dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 Il risultato è il seguente:
 <img src="../ESAME/Immagini/Diff_NIR_NDVI.png" /> 
 
+> **Commento**
+>
 > Osserviamo come la differenza è maggiore nell'area soggetta a incendio sia per quanto riguarda la banda del NIR che per quanto riguarda l'NDVI, mentre il resto dell'area è rimasta pressochè uguale.
+>
+> Valori negativi rappresentano zone di aumento della vegetazione; viceversa, valori positivi indicano zone di diminuzione della vegetazione.
 
 
 ---
@@ -207,4 +211,4 @@ Il risultato è il seguente:
 + L'area soggetta a incendio mostra una forte diminuzione della copertura vegetativa, come visto dal valore dell'NDVI e dalla differenza nella riflettanza nell'infrarosso vicino.
 + Le immagini qui analizzate riguardano solo una piccola porzione di tutta l'area che è stata impattata dagli incendi della primavera 2025: per un'analisi su più larga scala è necessario scaricare immagini complete di tutte le regioni di Manitoba e Saskatchewan.
 + Queste aree sono soggette a incendi annuali: le immagini del 2024 mostrano però una vegetazione tuttosommato sana e la porzione di suolo nudo è ridotta. Questo probabilmente è dovuto a un adattamento della vegetazione di queste zone a questo tipo di disturbo, nonostante gli impatti sul breve periodo siano notevoli. Un ulteriore sviluppo di queste analisi potrebbe riguardare il confronto dell'impatto degli incendi nei vari anni e non solo di quelli del 2025.
-+ Il telerilevamento e l'analisi dei dati attraverso le bande di riflettanza e gli indici spettrali sono un valido strumento per analizzare i dati da satellote e valutare gli impatti che fenomeni come gli incendi possono avere su vaste aree.
++ Il telerilevamento e l'analisi dei dati attraverso le bande di riflettanza e gli indici spettrali sono un valido strumento per analizzare i dati da satellite e valutare gli impatti che fenomeni come gli incendi possono avere su vaste aree.
