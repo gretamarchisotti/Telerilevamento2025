@@ -5,7 +5,7 @@
 // I file finali sono stati poi esportati su Google Drive e successivamente scaricati, rispettivamente con i nomi Canada2024 e Canada2025, in formato tiff
 
 // Immagine del 2024
-// Per questa immagine è stato scelto il periodo compreso tra il 1° e il 30 giugno 2024, per cui è stata fatta una media
+// Per questa immagine è stato scelto il periodo compreso tra il 1° e il 30 giugno 2024, per cui è stata scelta la mediana
 // ==============================================
 // Function to mask clouds using the QA60 band
 // Bits 10 and 11 correspond to opaque clouds and cirrus
@@ -39,7 +39,7 @@ print('Number of images in collection:', collection.size());
 
 // ==============================================
 // Create a median composite from the collection
-// Useful when the pinetapreNIR overlaps multiple scenes or frequent cloud cover
+// Useful when the AOI overlaps multiple scenes or frequent cloud cover
 // ==============================================
 var composite = collection.median().clip(aoi);
 
@@ -83,7 +83,7 @@ Export.image.toDrive({
 // =====================================================================================
 
 // Immagine del 2025
-// Per questa immagine è stato scelto il periodo compreso tra il 1° e il 30 giugno 2025, per cui è stata fatta una media
+// Per questa immagine è stato scelto il periodo compreso tra il 1° e il 30 giugno 2025, per cui è stata scelta la mediana
 // ==============================================
 // Function to mask clouds using the QA60 band
 // Bits 10 and 11 correspond to opaque clouds and cirrus
@@ -117,7 +117,7 @@ print('Number of images in collection:', collection.size());
 
 // ==============================================
 // Create a median composite from the collection
-// Useful when the pinetapreNIR overlaps multiple scenes or frequent cloud cover
+// Useful when the AOI overlaps multiple scenes or frequent cloud cover
 // ==============================================
 var composite = collection.median().clip(aoi);
 
