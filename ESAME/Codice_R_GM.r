@@ -17,6 +17,7 @@ library(patchwork) # Pacchetto per comporre più grafici ggplot insieme
 # Imposto la working directory
 setwd("C:/Users/march/Desktop/BOLOGNA/II semestre/Telerilevamento geoecologico in R/ESAME")
 
+# ---
 # IMPORTAZIONE DELLE IMMAGINI
 # Importo in R le immagini scaricate con Google Earth Engine
 sentinel2024 <- rast("Canada2024.tif")
@@ -29,14 +30,14 @@ sentinel2025
 im.multiframe(1,2)
 plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
 plotRGB(sentinel2025, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2025")
-dev.off()
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # Visualizzo le quattro bande separate (RGB e NIR) per entrambe le immagini
 plot(sentinel2024, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
 plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
-# Salvo le immagini in formato .png
-
+# ---
 # NIR
 # Visualizzo le due immagini con il NIR ponendo la banda 8 al posto della banda del rosso e le inserisco in un multiframe con le immagini in RGB
 im.multiframe(2,2)
@@ -46,28 +47,7 @@ im.plotRGB(sentinel2024, r=4, g=1, b=3)
 im.plotRGB(sentinel2025, r=4, g=1, b=3)
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
-# NDVI
-# Calcolo l'NDVI per entrambe le immagini e le visualizzo graficamente in un multiframe, modificandone il colore con una delle palette di viridis 
-ndvi2024 = im.ndvi(sentinel2024, 4, 1)
-ndvi2025 = im.ndvi(sentinel2025, 4, 1)
-im.multiframe(2,1)
-plot(ndvi2024, col=rocket(100), main="NDVI 2024")
-plot(ndvi2025, col=rocket(100), main="NDVI 2025")
-dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
-
-# ANALISI MULTITEMPORALE
-# Faccio la differenza tra l'immagine del 2024 e quella del 2025, scegliendo solo la banda B8 relativa al NIR
-canada_diff = sentinel2024[[4]]-sentinel2025[[4]]
-
-# Ripeto la stessa procedura per l'NDVI
-ndvi_diff = ndvi2024-ndvi2025
-
-# Faccio un multiframe con i plot di entrambe le differenze; quindi, salvo l'immagine in formato .png e chiudo il pannello grafico
-im.multiframe(1,2)
-plot(canada_diff, col=mako(100), main="NIR")
-plot(ndvi_diff, col=mako(100), main="NDVI")
-dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
-
+# ---
 # CLASSIFICAZIONE DELLE IMMAGINI
 # Creao un multiframe per osservare le due immagini classificate insieme
 im.multiframe(1,2)
@@ -99,4 +79,28 @@ tab # Osservo il risultato, riportato qui di seguito
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 p1 + p2
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
+
+# ---
+# NDVI
+# Calcolo l'NDVI per entrambe le immagini e le visualizzo graficamente in un multiframe, modificandone il colore con una delle palette di viridis 
+ndvi2024 = im.ndvi(sentinel2024, 4, 1)
+ndvi2025 = im.ndvi(sentinel2025, 4, 1)
+im.multiframe(1,2)
+plot(ndvi2024, col=rocket(100), main="NDVI 2024")
+plot(ndvi2025, col=rocket(100), main="NDVI 2025")
+dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
+
+# ---
+# ANALISI MULTITEMPORALE
+# Faccio la differenza tra l'immagine del 2024 e quella del 2025, scegliendo solo la banda B8 relativa al NIR
+canada_diff = sentinel2024[[4]]-sentinel2025[[4]]
+
+# Ripeto la stessa procedura per l'NDVI
+ndvi_diff = ndvi2024-ndvi2025
+
+# Faccio un multiframe con i plot di entrambe le differenze; quindi, salvo l'immagine in formato .png e chiudo il pannello grafico
+im.multiframe(1,2)
+plot(canada_diff, col=mako(100), main="NIR")
+plot(ndvi_diff, col=mako(100), main="NDVI")
 dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
