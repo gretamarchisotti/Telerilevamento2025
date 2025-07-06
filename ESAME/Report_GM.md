@@ -161,7 +161,7 @@ Il codice per calcolare l'NDVI nelle immagini è il seguente:
 ndvi2024 = im.ndvi(sentinel2024, 4, 1)
 ndvi2025 = im.ndvi(sentinel2025, 4, 1)
 
-im.multiframe(2,1)
+im.multiframe(1,2)
 plot(ndvi2024, col=rocket(100), main="NDVI 2024")
 plot(ndvi2025, col=rocket(100), main="NDVI 2025")
 ```
