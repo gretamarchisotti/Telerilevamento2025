@@ -142,17 +142,17 @@ p1 + p2
 
 Si riportano i risultati in una tabella:
 
-| Classe       | 2024 | 2025 |
-|---           |---   |---   |
-|   1: Altro   |  24  |  49  |
-|   2: Foresta |  76  |  51  |
+| Classe       | 2024  | 2025  |
+|---           |---    |---    |
+|   1: Altro   |  24%  |  49%  |
+|   2: Foresta |  76%  |  51%  |
 
 Il grafico, invece, è il seguente:
 
 <img src="../ESAME/Immagini/Class_plot.png" /> 
 
 ### Indici spettrali: NDVI
-Il Normalized Difference Vegetation Index (NDVI) è un indice utilizzato per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione radiometrica in entrata e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
+Il *Normalized Difference Vegetation Index* (NDVI) è un indice utilizzato per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione radiometrica in entrata e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
 
 Siccome la vegetazione sana riflette molto nell'infrarosso vicino e poco nel rosso, il suo NDVI avrà valori molto alti; viceversa, la vegetazione stressata avrà una riflettanza minore nel NIR e maggiore nel rosso e quindi il suo NDVI sarà più basso.
 
