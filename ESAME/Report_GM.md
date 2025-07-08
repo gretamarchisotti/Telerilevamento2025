@@ -114,17 +114,17 @@ Di seguito si riporta l'immagine ottenuta:
 
 > **Commento**
 >
-> In blu si osserva l'area vegetata (class 2), mentre in giallo (class 1) tutto ciò che non è vegetato.
+> In blu si osserva l'area vegetata (class 2: Forest), mentre in giallo (class 1: Everything else) tutto ciò che non è vegetazione.
 >
-> Notiamo come nell'immagine di sinistra, che corrisponde al 2025, la percentuale di pixel appartenenti alla classe 1 sono notevolmente aumentati, a causa dell'incendio.
+> Notiamo come nell'immagine di sinistra, che corrisponde al 2025, la percentuale di pixel appartenenti alla classe 1 (Everything else) sono notevolmente aumentati, a causa dell'incendio.
 
 Questo si può osservare anche calcolando la percentuale delle due classi nelle immagini:
 ```r
 perc2024 = freq(sentinel2024_cl)*100/ncell(sentinel2024_cl)
-perc2024 # Foresta: 76%, Altro: 24%
+perc2024 # Forest: 76%, Everything else: 24%
 
 perc2025 = freq(sentinel2025_cl)*100/ncell(sentinel2025_cl)
-perc2025 # Foresta: 51%, Altro: 49%
+perc2025 # Forest: 51%, Everything else: 49%
 ```
 > I risultati mostrano come la percentuale di foresta sia scesa dal 76% al 51% dal 2024 al 2025 a causa dell'incendio.
 
@@ -140,8 +140,8 @@ Si riportano i risultati in una tabella:
 
 | Classe       | 2024  | 2025  |
 |---           |---    |---    |
-|   1: Altro   |  24%  |  49%  |
-|   2: Foresta |  76%  |  51%  |
+|   1: Everything else |  24%  |  49%  |
+|   2: Forest |  76%  |  51%  |
 
 ```r
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
