@@ -10,7 +10,7 @@ Il progetto ha lo scopo di analizzare un'area del Canada, al confine tra le regi
 
 L'analisi vuole osservare le differenze in termini di vegetazione tra il 2024 e il 2025 e valutare quindi l'impatto dell'incendio stesso.
 
-Sono state pertanto scelte due immagini di Sentinel-2, che riguardano una media di giugno 2024 e una media di giugno 2025.
+Sono state pertanto scelte due immagini di Sentinel-2, che riguardano giugno 2024 e giugno 2025.
 
 ## Raccolta delle immagini
 Le immagini sono state scaricate attraverso il sito web di [Google Earth Engine](https://earthengine.google.com/), scegliendo l'area descritta precedentemente.
@@ -134,10 +134,6 @@ classi = c("Forest", "Everything else")
 a2024 = c(76,24)
 a2025 = c(51,49)
 tab = data.frame(classi, a2024, a2025)
-
-p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
-p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
-p1 + p2
 ```
 
 Si riportano i risultati in una tabella:
@@ -147,12 +143,18 @@ Si riportano i risultati in una tabella:
 |   1: Altro   |  24%  |  49%  |
 |   2: Foresta |  76%  |  51%  |
 
-Il grafico, invece, è il seguente:
+```r
+p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+p2 = ggplot(tab, aes(x=classi, y=a2025, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+p1 + p2
+```
+
+Il grafico è il seguente:
 
 <img src="../ESAME/Immagini/Class_plot.png" /> 
 
 ### Indici spettrali: NDVI
-Il *Normalized Difference Vegetation Index* (NDVI) è un indice utilizzato per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione radiometrica in entrata e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
+Il *Normalized Difference Vegetation Index* (NDVI) è un indice utilizzato per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione delle immagini e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
 
 Siccome la vegetazione sana riflette molto nell'infrarosso vicino e poco nel rosso, il suo NDVI avrà valori molto alti; viceversa, la vegetazione stressata avrà una riflettanza minore nel NIR e maggiore nel rosso e quindi il suo NDVI sarà più basso.
 
@@ -188,7 +190,6 @@ ndvi_diff = ndvi2024-ndvi2025
 im.multiframe(1,2)
 plot(canada_diff, col=mako(100), main="NIR")
 plot(ndvi_diff, col=mako(100), main="NDVI")
-dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 ```
 > [!NOTE]
 >
@@ -203,7 +204,6 @@ Il risultato è il seguente:
 > Osserviamo come la differenza è maggiore nell'area soggetta a incendio sia per quanto riguarda la banda del NIR che per quanto riguarda l'NDVI, mentre il resto dell'area è rimasta pressochè uguale.
 >
 > Valori negativi rappresentano zone di aumento della vegetazione; viceversa, valori positivi indicano zone di diminuzione della vegetazione.
-
 
 ---
 
