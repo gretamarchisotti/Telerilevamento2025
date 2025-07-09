@@ -29,7 +29,7 @@ sentinel2024
 sentinel2025 <- rast("Canada2025.tif")
 sentinel2025
 
-# Visualizzo entrambe le immagini in RGB creando un multiframe e le salvo in .png; infine chiudo il pannello grafico
+# Visualizzo entrambe le immagini in RGB creando un multiframe
 im.multiframe(1,2)
 plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
 plotRGB(sentinel2025, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2025")
@@ -42,7 +42,7 @@ dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # ---
 # CLASSIFICAZIONE DELLE IMMAGINI
-# Creao un multiframe per osservare le due immagini classificate insieme
+# Creo un multiframe per osservare le due immagini classificate insieme
 im.multiframe(1,2)
 
 # Classifico le due immagini in due classi (class 1; class 2)
@@ -53,10 +53,10 @@ dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 
 # Calcolo la percentuale per le due classi, per entrambe le immagini; poi osservo i risultati
 perc2024 = freq(sentinel2024_cl)*100/ncell(sentinel2024_cl)
-perc2024 # Foresta: 76%, Altro: 24%
+perc2024 # Forest: 76%, Everything else: 24%
 
 perc2025 = freq(sentinel2025_cl)*100/ncell(sentinel2025_cl)
-perc2025 # Foresta: 51%, Altro: 49%
+perc2025 # Forest: 51%, Everything else: 49%
 
 # Creo una tabella con i risultati
 classi = c("Forest", "Everything else")
@@ -89,6 +89,7 @@ dev.off() # Chiudo il pannello grafico dopo aver salvato l'immagine in .png
 # Calcolo l'NDVI per entrambe le immagini e le visualizzo graficamente in un multiframe, modificandone il colore con una delle palette di viridis 
 ndvi2024 = im.ndvi(sentinel2024, 4, 1)
 ndvi2025 = im.ndvi(sentinel2025, 4, 1)
+
 im.multiframe(1,2)
 plot(ndvi2024, col=rocket(100), main="NDVI 2024")
 plot(ndvi2025, col=rocket(100), main="NDVI 2025")
@@ -102,7 +103,7 @@ nir_diff = sentinel2024[[4]]-sentinel2025[[4]]
 # Ripeto la stessa procedura per l'NDVI
 ndvi_diff = ndvi2024-ndvi2025
 
-# Faccio un multiframe con i plot di entrambe le differenze; quindi, salvo l'immagine in formato .png e chiudo il pannello grafico
+# Faccio un multiframe con i plot di entrambe le differenze
 im.multiframe(1,2)
 plot(nir_diff, col=mako(100), main="NIR")
 plot(ndvi_diff, col=mako(100), main="NDVI")
