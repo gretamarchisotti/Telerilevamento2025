@@ -58,46 +58,6 @@ L'immagine risultante è la seguente:
 ---
 
 ## Analisi dei dati
-### Visualizzazione delle bande
-È stato creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è stata scelta la palette di viridis chiamata magma.
-
-> [!NOTE]
->
-> Questo è possibile perchè Sentinel-2, essendo un satellite, acquisisce le immagini per bande: possiamo quindi visualizzarle in modo combinato, per esempio per mostrare un'immagine con i colori reali, oppure separatamente come in questo caso.
-
-```r
-plot(sentinel2024, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
-plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
-```
-
-Per quanto riguarda il 2024, il risultato è il seguente:
-<img src="../ESAME/Immagini/Bande2024.png" /> 
-
-Per quanto riguarda il 2025, invece, il risultato è:
-<img src="../ESAME/Immagini/Bande2025.png" />
-
-> **Commento**
-> 
->  Da entrambe le immagini si può notare come, mentre le bande 4, 3 e 2 sono abbastanza simili tra loro, la banda 8, e cioè il NIR, risulta essere molto diversa: è infatti la banda che ci permette di visualizzare al meglio la vegetazione.
-> 
-> Se la vegetazione è sana, la riflettanza sarà maggiore nell'infrarosso vicino (NIR); viceversa, se la vegetazione è sottoposta a stress, come un incendio,  la riflettanza del NIR diminuisce: i valori del NIR del 2025 sono, infatti, molto più bassi nell'area soggetta a incendio.
-
-È stato poi scelto di visualizzare le immagini con il NIR, ponendo la banda 8 al posto della banda del rosso e plottando le immagini in un pannello multiframe, insieme a quelle visualizzate nello spettro del visibile. Il codice è il seguente: 
-```r
-im.multiframe(2,2)
-plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
-plotRGB(sentinel2025, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2025")
-im.plotRGB(sentinel2024, r=4, g=1, b=3)
-im.plotRGB(sentinel2025, r=4, g=1, b=3)
-```
-
-Si ottiene in questo modo l'immagine riportata qui di seguito:
-<img src="../ESAME/Immagini/CanadaRGB_NIR.png" width=120% />
-
-> **Commento**
-> 
-> Le immagini in basso sono quelle in cui è visualizzata la banda del NIR che, essendo stata inserita al posto della banda red, permette di visualizzare la vegetazione in rosso. Questa banda è infatti la più indicata per visualizzare la vegetazione e le diverse sfumature di rosso corrispondono a diverse tipologie di vegetazione. Il suolo nudo appare invece in azzurro chiaro.
-
 ### Classificazione delle immagini
 Le immagini sono state classificate in due classi corrispondenti all'area coperta da vegetazione e tutta la restante area, composta principalmente da laghi, suolo nudo e dall'area dell'incendio nell'immagine del 2025.
 
@@ -138,10 +98,10 @@ tab = data.frame(classi, a2024, a2025)
 
 Si riportano i risultati in una tabella:
 
-| Classe       | 2024  | 2025  |
-|---           |---    |---    |
+| Classe | 2024 | 2025 |
+|--- |--- |--- |
 |   1: Everything else |  24%  |  49%  |
-|   2: Forest |  76%  |  51%  |
+|   2: Forest |76% |51% |
 
 ```r
 p1 = ggplot(tab, aes(x=classi, y=a2024, fill=classi, color=classi)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
@@ -152,6 +112,46 @@ p1 + p2
 Il grafico è il seguente:
 
 <img src="../ESAME/Immagini/Class_plot.png" /> 
+
+### Visualizzazione delle bande
+È stato creato un grafico per mostrare le differenti bande scelte per le immagini: la banda 4 corrisponde al colore rosso, la banda 3 al verde, la banda 2 al blu e la banda 8 all'infrarosso vicino (NIR); per i grafici è stata scelta la palette di viridis chiamata magma.
+
+> [!NOTE]
+>
+> Questo è possibile perchè Sentinel-2, essendo un satellite, acquisisce le immagini per bande: possiamo quindi visualizzarle in modo combinato, per esempio per mostrare un'immagine con i colori reali, oppure separatamente come in questo caso.
+
+```r
+plot(sentinel2024, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
+plot(sentinel2025, main=c("B4-Red", "B3-Green", "B2-Blue", "B8-NIR"), col=magma(100))
+```
+
+Per quanto riguarda il 2024, il risultato è il seguente:
+<img src="../ESAME/Immagini/Bande2024.png" /> 
+
+Per quanto riguarda il 2025, invece, il risultato è:
+<img src="../ESAME/Immagini/Bande2025.png" />
+
+> **Commento**
+> 
+>  Da entrambe le immagini si può notare come, mentre le bande 4, 3 e 2 sono abbastanza simili tra loro, la banda 8, e cioè il NIR, risulta essere molto diversa: è infatti la banda che ci permette di visualizzare al meglio la vegetazione.
+> 
+> Se la vegetazione è sana, la riflettanza sarà maggiore nell'infrarosso vicino (NIR); viceversa, se la vegetazione è sottoposta a stress, come un incendio,  la riflettanza del NIR diminuisce: i valori del NIR del 2025 sono, infatti, molto più bassi nell'area soggetta a incendio.
+
+È stato poi scelto di visualizzare le immagini con il NIR, ponendo la banda 8 al posto della banda del rosso e plottando le immagini in un pannello multiframe, insieme a quelle visualizzate nello spettro del visibile. Il codice è il seguente: 
+```r
+im.multiframe(2,2)
+plotRGB(sentinel2024, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2024")
+plotRGB(sentinel2025, r = 1, g = 2, b = 3, stretch = "lin", main = "Sentinel-2 (median) 2025")
+im.plotRGB(sentinel2024, r=4, g=1, b=3)
+im.plotRGB(sentinel2025, r=4, g=1, b=3)
+```
+
+Si ottiene in questo modo l'immagine riportata qui di seguito:
+<img src="../ESAME/Immagini/CanadaRGB_NIR.png" width=120% />
+
+> **Commento**
+> 
+> Le immagini in basso sono quelle in cui è visualizzata la banda del NIR che, essendo stata inserita al posto della banda red, permette di visualizzare la vegetazione in rosso. Questa banda è infatti la più indicata per visualizzare la vegetazione e le diverse sfumature di rosso corrispondono a diverse tipologie di vegetazione. Il suolo nudo appare invece in azzurro chiaro.
 
 ### Indici spettrali: NDVI
 Il *Normalized Difference Vegetation Index* (NDVI) è un indice utilizzato per la vegetazione dato dalla differenza tra la riflettanza nel NIR e la riflettanza nel red, che è stato standardizzato, in modo che sia svincolato dalla risoluzione delle immagini e quindi in modo che il range vada sempre da +1 a -1, a prescindere dal numero di bit dell’immagine.
