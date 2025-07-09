@@ -147,7 +147,7 @@ im.plotRGB(sentinel2025, r=4, g=1, b=3)
 ```
 
 Si ottiene in questo modo l'immagine riportata qui di seguito:
-<img src="../ESAME/Immagini/CanadaRGB_NIR.png" width=120% />
+<img src="../ESAME/Immagini/CanadaRGB_NIR.png" />
 
 > **Commento**
 > 
