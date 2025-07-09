@@ -1,5 +1,8 @@
-# PROGETTO D'ESAME - CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
+# PROGETTO D'ESAME (09/07/2025) - ANALISI DI UN'AREA CANADESE SOGGETTA A INCENDIO NELLA PRIMAVERA 2025
+# Telerilevamento geologico in R
 # Greta Marchisotti
+
+# CODICE IN R PER L'ELABORAZIONE DELLE IMMAGINI
 
 # Le immagini sono relative agli incendi verificatisi nella primavera del 2025 in Canada, nell'area a confine tra le regioni Manitoba e Saskatchewan
 # Grazie a Google Earth Engine sono state scaricate due immagini di Sentinel-2 (per il codice si veda lo script Esame.js)
