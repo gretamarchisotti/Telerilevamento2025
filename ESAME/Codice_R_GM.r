@@ -11,7 +11,7 @@
 # Il salvataggio delle immagini da R è stato fatto con il menù a tendina di R, in formato .png
 
 # Pacchetti richiesti e utilizzati
-library(terra) # Paccheto per l'analisi spaziale dei dati con vettori e dati raster
+library(terra) # Pacchetto per l'analisi spaziale dei dati con vettori e dati raster
 library(imageRy) # Pacchetto per manipolare, visualizzare ed esportare immagini raster in R
 library(viridis) # Pacchetto per cambiare le palette di colori anche per chi è affetto da colorblindness
 library(ggplot2) # Pacchetto per creare grafici ggplot
