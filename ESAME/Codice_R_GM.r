@@ -8,7 +8,7 @@
 # Grazie a Google Earth Engine sono state scaricate due immagini di Sentinel-2 (per il codice si veda lo script Esame.js)
 # La prima riguarda una mediana delle immagini di giugno 2024, la seconda una mediana delle immagini di giugno 2025, dopo che si sono verificati gli incendi
 
-# Il salvataggio delle immagini da R, salvo diversamente specificato, è stato fatto con il menù a tendina di R
+# Il salvataggio delle immagini da R è stato fatto con il menù a tendina di R, in formato .png
 
 # Pacchetti richiesti e utilizzati
 library(terra) # Paccheto per l'analisi spaziale dei dati con vettori e dati raster
