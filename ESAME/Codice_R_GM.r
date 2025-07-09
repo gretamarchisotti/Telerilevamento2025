@@ -6,7 +6,7 @@
 
 # Le immagini sono relative agli incendi verificatisi nella primavera del 2025 in Canada, nell'area a confine tra le regioni Manitoba e Saskatchewan
 # Grazie a Google Earth Engine sono state scaricate due immagini di Sentinel-2 (per il codice si veda lo script Esame.js)
-# La prima riguarda una media delle immagini di giugno 2024, la seconda una media delle immagini di giugno 2025, dopo che si sono verificati gli incendi
+# La prima riguarda una mediana delle immagini di giugno 2024, la seconda una mediana delle immagini di giugno 2025, dopo che si sono verificati gli incendi
 
 # Il salvataggio delle immagini da R, salvo diversamente specificato, è stato fatto con il menù a tendina di R
 
